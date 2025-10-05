@@ -1,93 +1,78 @@
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claim Your Domain</title>
-    <style>
-        /* Reset and basic styles */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #fdf6e3, #fff);
-            color: #111;
-            text-align: center;
-        }
-
-        header {
-            padding: 4rem 1rem 2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin: 0.5rem 0;
-            color: #222;
-        }
-
-        p.subheadline {
-            font-size: 1.2rem;
-            margin: 1rem 0 2rem;
-            color: #555;
-        }
-
-        .cta-note {
-            font-size: 0.9rem;
-            color: #777;
-            margin-bottom: 2rem;
-        }
-
-        /* Form placeholder container */
-        #tally-form-placeholder {
-            max-width: 500px;
-            margin: 0 auto 4rem;
-            padding: 1rem;
-            border: 2px dashed #aaa;
-            border-radius: 12px;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #aaa;
-            font-style: italic;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 1rem;
-            font-size: 0.8rem;
-            color: #aaa;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            p.subheadline {
-                font-size: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claim Your Domain</title>
+<style>
+/* Minimal styling */
+body { margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display:flex; flex-direction:column; min-height:100vh; background: linear-gradient(to bottom, #fdf6e3, #fff); color:#111; text-align:center;}
+header { padding: 4rem 1rem 2rem; }
+h1 { font-size:2.5rem; margin:0.5rem 0; color:#222;}
+p.subheadline { font-size:1.2rem; margin:1rem 0 2rem; color:#555;}
+.cta-note { font-size:0.9rem; color:#777; margin-bottom:2rem;}
+#tally-form-container { max-width:500px; margin:0 auto 4rem; }
+footer { margin-top:auto; padding:1rem; font-size:0.8rem; color:#aaa;}
+@media (max-width:600px){h1{font-size:2rem;} p.subheadline{font-size:1rem;}}
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Karibu! Tuende basi!</h1>
-        <p class="subheadline">Hii domain inaweza kuwa yako. Nicheki tu kwa form chini kuclaim site yako.</p>
-        <p class="cta-note">Naweza kuongea na wewe vile tunaeza make iwe yako.</p>
-    </header>
+<header>
+    <h1 id="hero">Loading...</h1>
+    <p class="subheadline" id="subheadline"></p>
+    <p class="cta-note" id="cta-note"></p>
+</header>
 
-    <!-- Placeholder for Tally.so form -->
-    <div id="tally-form-placeholder">
-        Tally.so Form Placeholder
-    </div>
+<!-- Tally.so form container -->
+<div id="tally-form-container">
+    <iframe data-tally-src="https://tally.so/embed/3q0BBd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="378" frameborder="0" marginheight="0" marginwidth="0" title="Contact form"></iframe>
+</div>
 
-    <footer>
-        &copy; 2025 Your Name or Brand
-    </footer>
+<footer>&copy; 2025 Your Name or Brand</footer>
+
+<script>
+// Define text in both languages
+const content = {
+    "sw": {
+        hero: "Karibu! Tuende basi!",
+        subheadline: "Hii domain inaweza kuwa yako. Nicheki tu kwa form chini kuclaim site yako.",
+        cta: "Naweza kuongea na wewe vile tunaeza ifanye iwe yako."
+    },
+    "en": {
+        hero: "Welcome! Let's go!",
+        subheadline: "This domain could be yours. Just check the form below to claim your site.",
+        cta: "I’d love to talk with you about how we can make it yours."
+    }
+};
+
+// Detect browser language
+const lang = navigator.language || navigator.userLanguage;
+const shortLang = lang.split('-')[0]; // e.g., "en-US" -> "en"
+
+// Default to English if not Swahili
+const selectedLang = content[shortLang] ? shortLang : "en";
+
+// Insert text
+document.getElementById("hero").textContent = content[selectedLang].hero;
+document.getElementById("subheadline").textContent = content[selectedLang].subheadline;
+document.getElementById("cta-note").textContent = content[selectedLang].cta;
+</script>
+
+<!-- Tally.so embed script -->
+<script>
+var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+    if("undefined"!=typeof Tally) {
+        Tally.loadEmbeds();
+    } else {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc});
+    }
+};
+if("undefined"!=typeof Tally)v();
+else if(d.querySelector('script[src="'+w+'"]')==null){
+    var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
+}
+</script>
 
 </body>
 </html>
