@@ -3,85 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Landing Page</title>
+<title>Claim Your Domain</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header, footer {
-    background: #007acc;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-  }
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    text-align: center;
-  }
-  h1 {
-    margin-bottom: 0.5rem;
-  }
-  p {
-    margin-bottom: 2rem;
-  }
-  form {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  input, textarea, button {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-  button {
-    background: #007acc;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #005f99;
-  }
+/* Minimal styling */
+body { margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display:flex; flex-direction:column; min-height:100vh; background: linear-gradient(to bottom, #fdf6e3, #fff); color:#111; text-align:center;}
+header { padding: 4rem 1rem 2rem; }
+h1 { font-size:2.5rem; margin:0.5rem 0; color:#222;}
+p.subheadline { font-size:1.2rem; margin:1rem 0 2rem; color:#555;}
+.cta-note { font-size:0.9rem; color:#777; margin-bottom:2rem;}
+#tally-form-container { max-width:500px; margin:0 auto 4rem; }
+footer { margin-top:auto; padding:1rem; font-size:0.8rem; color:#aaa;}
+@media (max-width:600px){h1{font-size:2rem;} p.subheadline{font-size:1rem;}}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Welcome to My Site</h1>
+    <h1 id="hero">Loading...</h1>
+    <p class="subheadline" id="subheadline"></p>
+    <p class="cta-note" id="cta-note"></p>
 </header>
 
-<main>
-  <p>Get in touch with me using the form below.</p>
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="_replyto" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</main>
+<!-- Tally.so form container -->
+<div id="tally-form-container">
+    <iframe data-tally-src="https://tally.so/embed/3q0BBd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="378" frameborder="0" marginheight="0" marginwidth="0" title="Contact form"></iframe>
+</div>
 
-<footer>
-  <p>© 2025 Your Name</p>
-</footer>
+<footer>&copy; 2025 Tuende LLC</footer>
+
+<script>
+// Define text in both languages
+const content = {
+    "sw": {
+        hero: "Karibu! Tuende basi!",
+        subheadline: "Hii domain inaweza kuwa yako. Nicheki tu kwa form chini kuclaim site yako.",
+        cta: "Naweza kuongea na wewe vile tunaeza ifanye iwe yako."
+    },
+    "en": {
+        hero: "Welcome!",
+        subheadline: "This domain could be yours. Contact us using the form below.",
+        cta: "Let's make your entrepreneurial dream a reality!"
+    }
+};
+
+// Detect browser language
+const lang = navigator.language || navigator.userLanguage;
+const shortLang = lang.split('-')[0]; // e.g., "en-US" -> "en"
+
+// Default to English if not Swahili
+const selectedLang = content[shortLang] ? shortLang : "en";
+
+// Insert text
+document.getElementById("hero").textContent = content[selectedLang].hero;
+document.getElementById("subheadline").textContent = content[selectedLang].subheadline;
+document.getElementById("cta-note").textContent = content[selectedLang].cta;
+</script>
+
+<!-- Tally.so embed script -->
+<script>
+var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+    if("undefined"!=typeof Tally) {
+        Tally.loadEmbeds();
+    } else {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc});
+    }
+};
+if("undefined"!=typeof Tally)v();
+else if(d.querySelector('script[src="'+w+'"]')==null){
+    var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
+}
+</script>
 
 </body>
 </html>
